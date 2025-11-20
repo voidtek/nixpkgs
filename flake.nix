@@ -16,6 +16,8 @@
         pkgs.htop
         pkgs.btop
         pkgs.nano
+        pkgs.cacert
+        pkgs.gnupg
       ];
       
       sshSetup = ''
