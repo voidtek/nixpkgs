@@ -29,9 +29,9 @@
             xterm-color|*-256color) color_prompt=yes;;
         esac
         if [ "$color_prompt" = yes ]; then
-          export PS1="\[\033[90m\][$NIXPKGS_PROFILE]\[\033[0m\] $PS1"
+          export PS1="\[\033[90m\][$NIXPKGS_PROFILE]\[\033[0m\]$PS1"
         else
-          export PS1="[$NIXPKGS_PROFILE] $PS1"
+          export PS1="[$NIXPKGS_PROFILE]$PS1"
         fi
       '';
     in
