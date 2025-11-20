@@ -1,4 +1,4 @@
-{ pkgs, defaultPackages, sshSetup }:
+{ pkgs, defaultPackages, sshSetup, shellCustom }:
 
 pkgs.mkShell {
   buildInputs = defaultPackages ++ [
@@ -9,6 +9,7 @@ pkgs.mkShell {
 
   shellHook = ''
     ${sshSetup}
+    ${shellCustom}
     echo ""
     echo "██████╗  ██████╗  ██████╗██╗   ██╗███████╗██████╗"
     echo "██╔══██╗██╔═══██╗██╔════╝██║ ███╔╝██╔════╝██╔══██╗"
