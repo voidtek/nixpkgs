@@ -7,7 +7,7 @@ pkgs.mkShell {
     pkgs.talosctl
     pkgs.k9s
     pkgs.jq
-    pkgs.helm
+    pkgs.helm2
     pkgs.tflint
     pkgs.terraform-docs
     pkgs.kube-score
