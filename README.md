@@ -1,34 +1,44 @@
 # nixpkgs
 My Nixpkgs Overlay
 
-A Nix flake providing a DevOps development shell with essential tools.
+A Nix flake providing multiple development shells with essential tools.
 
-## Tools Included
-- OpenTofu - Infrastructure as Code
-- kubectl - Kubernetes CLI
-- talosctl - Talos Linux management
-- k9s - Kubernetes cluster management
-- jq - JSON processor
-- helm - Kubernetes package manager
-- tflint - Terraform linter
-- terraform-docs - Generate docs from Terraform modules
-- kube-score - Kubernetes object analysis
-- kubeconform - Kubernetes resource validation
-- helm-docs - Generate documentation from Helm charts
+## Available Profiles
+
+### Default Profile
+- wget, curl, shellcheck, unzip, htop, btop, nano, cacert, gnupg
+
+### Python Profile  
+- All default tools + Python 3, pip, pylint, and development packages
+- Includes: jinja2, requests, pyyaml, beautifulsoup4, boto3, PyGithub, etc.
+
+### Docker Profile
+- All default tools + Docker, Docker Compose, Docker Buildx
+
+### Hugo Profile
+- All default tools + Hugo, Node.js, Git, Go
+
+### DevOps Profile
+- All default tools + OpenTofu, kubectl, talosctl, k9s, jq, helm
+- Additional tools: tflint, terraform-docs, kube-score, kubeconform, helm-docs, yamllint, awscli
 
 ## Usage
 ```bash
-# Enter development shell
-nix develop .#devops
+# Available profiles
+nix develop .#default    # Basic tools
+nix develop .#python     # Python development
+nix develop .#docker     # Docker tools
+nix develop .#hugo       # Hugo static sites
+nix develop .#devops     # DevOps/Infrastructure
 
-# Or run directly
+# Or run directly from GitHub
 nix develop github:voidtek/nixpkgs#devops
 ```
 
 ## Requirements
 - Git installed
 - Nix package manager installed with flakes enabled
-- x86_64-linux system
+- x86_64-linux or aarch64-linux system
 - Docker daemon running (for docker profile)
 
 ### Installation Script
