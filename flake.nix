@@ -19,6 +19,7 @@
           nano
           cacert
           gnupg
+          ncdu
         ];
         sshSetup = ''
           eval "$(ssh-agent -s)" > /dev/null
