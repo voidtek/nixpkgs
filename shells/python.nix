@@ -1,7 +1,7 @@
 { pkgs, defaultPackages, sshSetup, shellCustom }:
 
-pkgs.mkShell {
-  buildInputs = defaultPackages ++ [
+pkgs.mkShellNoCC {
+  packages = defaultPackages ++ [
     pkgs.python3
     pkgs.python3Packages.pip
     pkgs.python-launcher

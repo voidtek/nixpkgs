@@ -1,7 +1,7 @@
 { pkgs, defaultPackages, sshSetup, shellCustom }:
 
-pkgs.mkShell {
-  buildInputs = defaultPackages ++ [
+pkgs.mkShellNoCC {
+  packages = defaultPackages ++ [
     pkgs.hugo
     pkgs.nodejs
     pkgs.git

@@ -1,7 +1,7 @@
 { pkgs, defaultPackages, sshSetup, shellCustom }:
 
-pkgs.mkShell {
-  buildInputs = defaultPackages ++ [
+pkgs.mkShellNoCC {
+  packages = defaultPackages ++ [
     pkgs.opentofu
     pkgs.kubectl
     pkgs.talosctl
