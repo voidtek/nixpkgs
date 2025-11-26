@@ -20,6 +20,7 @@
           cacert
           gnupg
           ncdu
+          git
         ];
         sshSetup = ''
           eval "$(ssh-agent -s)" > /dev/null

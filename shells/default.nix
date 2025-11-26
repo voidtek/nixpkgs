@@ -6,6 +6,6 @@ pkgs.mkShellNoCC {
   shellHook = ''
     ${sshSetup}
     ${shellCustom}
-    echo "Basic shell with wget, curl, shellcheck, unzip, htop, btop, nano, cacert, gnupg, ncdu available"
+    echo "Basic shell with wget, curl, shellcheck, unzip, htop, btop, nano, cacert, gnupg, ncdu, git available"
   '';
 }

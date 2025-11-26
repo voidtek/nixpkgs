@@ -6,21 +6,19 @@ A Nix flake providing multiple development shells with essential tools.
 ## Available Profiles
 
 ### Default Profile
-- wget, curl, shellcheck, unzip, htop, btop, nano, cacert, gnupg
+Basic development tools and utilities
 
 ### Python Profile  
-- All default tools + Python 3, pip, pylint, and development packages
-- Includes: jinja2, requests, pyyaml, beautifulsoup4, boto3, PyGithub, etc.
+Python development environment with common packages
 
 ### Docker Profile
-- All default tools + Docker, Docker Compose, Docker Buildx
+Docker containerization tools
 
 ### Hugo Profile
-- All default tools + Hugo, Node.js, Git, Go
+Static site generation with Hugo
 
 ### DevOps Profile
-- All default tools + OpenTofu, kubectl, talosctl, k9s, jq, helm
-- Additional tools: tflint, terraform-docs, kube-score, kubeconform, helm-docs, yamllint, awscli
+Infrastructure and DevOps toolchain
 
 ## Usage
 ```bash
@@ -56,6 +54,62 @@ sudo apt install -y docker.io
 sudo systemctl start docker
 sudo systemctl enable docker
 sudo usermod -aG docker $USER
+```
+
+## Version Checking
+
+```bash
+# Check all package versions across profiles
+./scripts/check-versions.sh
+```
+
+See [scripts/README.md](scripts/README.md) for detailed usage instructions.
+
+### Current Status
+```
+🔍 Package versions in nixpkgs...
+================================
+📦 Default Profile:
+📦 wget: 1.25.0
+📦 curl: 8.16.0
+📦 shellcheck: 0.11.0
+📦 htop: 3.4.1
+📦 btop: 1.4.5
+📦 ncdu: 2.9.2
+📦 nano: 8.6
+📦 cacert: 3.115
+📦 gnupg: 2.4.8
+
+🐍 Python Profile:
+📦 python3: 3.13.9
+📦 pip: 25.0.1
+📦 pylint: 3.3.7
+
+🐳 Docker Profile:
+📦 docker: 28.5.1
+📦 docker-compose: 2.39.4
+📦 docker-buildx: 0.29.1
+
+📝 Hugo Profile:
+📦 hugo: 0.152.2
+📦 nodejs: 22.21.1
+📦 git: 2.51.2
+📦 go: 1.25.3
+
+⚙️  DevOps Profile:
+📦 opentofu: 1.10.7
+📦 kubectl: 1.34.1
+📦 talosctl: 1.11.5
+📦 k9s: 0.50.16
+📦 jq: 1.8.1
+📦 helm: 3.19.1
+📦 tflint: 0.59.1
+📦 terraform-docs: 0.20.0
+📦 kube-score: 1.20.0
+📦 kubeconform: 0.7.0
+📦 helm-docs: 1.14.2
+📦 yamllint: 1.37.1
+📦 awscli2: 2.31.11
 ```
 
 ## License
