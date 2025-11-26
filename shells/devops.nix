@@ -7,7 +7,7 @@ pkgs.mkShellNoCC {
     pkgs.talosctl
     pkgs.k9s
     pkgs.jq
-    pkgs.helm
+    pkgs.kubernetes-helm
     pkgs.tflint
     pkgs.terraform-docs
     pkgs.kube-score
