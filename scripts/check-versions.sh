@@ -32,6 +32,7 @@ echo ""
 echo "🐍 Python Profile:"
 show_version "python3" "$(get_nix_version python3)"
 show_version "pip" "$(get_nix_version python3Packages.pip)"
+show_version "uv" "$(get_nix_version uv)"
 show_version "pylint" "$(get_nix_version python3Packages.pylint)"
 
 echo ""

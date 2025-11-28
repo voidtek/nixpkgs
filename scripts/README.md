@@ -2,6 +2,35 @@
 
 Utility scripts for managing and monitoring the nixpkgs flake.
 
+## install.sh
+
+Automated installation script for Nix and dependencies.
+
+### Usage
+
+```bash
+# Run directly from GitHub
+curl -fsSL https://raw.githubusercontent.com/voidtek/nixpkgs/main/scripts/install.sh | bash
+
+# Or run locally
+./scripts/install.sh
+```
+
+### Features
+
+- Detects OS automatically (Ubuntu/Debian, Fedora/RHEL, Arch Linux)
+- Installs Git if not present
+- Installs Nix with flakes enabled
+- Configures Nix daemon
+- Optional Docker installation
+- Adds user to docker group
+
+### Requirements
+
+- `curl` - For downloading Nix installer
+- `sudo` - For system-level installations
+- Supported OS: Ubuntu, Debian, Fedora, RHEL, CentOS, Arch, Manjaro
+
 ## check-versions.sh
 
 Compares Nix package versions with the latest upstream releases from GitHub and official APIs.

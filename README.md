@@ -3,6 +3,15 @@ My Nixpkgs Overlay
 
 A Nix flake providing multiple development shells with essential tools.
 
+## About Nix
+
+Nix is a powerful package manager for Linux and macOS that makes package management reliable and reproducible. It provides atomic upgrades and rollbacks, side-by-side installation of multiple versions, and ensures that dependency specifications are complete.
+
+Learn more:
+- [Official Nix Website](https://nixos.org)
+- [Nix Manual](https://nixos.org/manual/nix/stable/)
+- [Nixpkgs Repository](https://github.com/NixOS/nixpkgs)
+
 ## Available Profiles
 
 ### Default Profile
@@ -39,22 +48,22 @@ nix develop github:voidtek/nixpkgs#devops
 - x86_64-linux or aarch64-linux system
 - Docker daemon running (for docker profile)
 
-### Installation Script
+### Quick Install
 ```bash
-# Install Git (Ubuntu/Debian)
-sudo apt update && sudo apt install -y git
+# One-line install (downloads and runs install script)
+curl -fsSL https://raw.githubusercontent.com/voidtek/nixpkgs/main/scripts/install.sh | bash
 
-# Install Nix with flakes
-curl -L https://nixos.org/nix/install | sh -s -- --daemon
-echo "experimental-features = nix-command flakes" | sudo tee -a /etc/nix/nix.conf
-sudo systemctl restart nix-daemon
-
-# Install Docker (Ubuntu/Debian)
-sudo apt install -y docker.io
-sudo systemctl start docker
-sudo systemctl enable docker
-sudo usermod -aG docker $USER
+# Or clone and run locally
+git clone https://github.com/voidtek/nixpkgs.git
+cd nixpkgs
+./scripts/install.sh
 ```
+
+The install script will:
+- Install Git (if not present)
+- Install Nix with flakes enabled
+- Optionally install Docker
+- Support Ubuntu/Debian, Fedora/RHEL, and Arch Linux
 
 ## Version Checking
 
@@ -83,6 +92,7 @@ See [scripts/README.md](scripts/README.md) for detailed usage instructions.
 🐍 Python Profile:
 📦 python3: 3.13.9
 📦 pip: 25.0.1
+📦 uv: 0.9.7
 📦 pylint: 3.3.7
 
 🐳 Docker Profile:
@@ -111,6 +121,14 @@ See [scripts/README.md](scripts/README.md) for detailed usage instructions.
 📦 yamllint: 1.37.1
 📦 awscli2: 2.31.11
 ```
+
+## Contributing
+
+Contributions are welcome! This is an open source project.
+
+- Report issues: [GitHub Issues](https://github.com/voidtek/nixpkgs/issues)
+- Submit pull requests: [GitHub Pull Requests](https://github.com/voidtek/nixpkgs/pulls)
+- Contribute to Nixpkgs: [NixOS/nixpkgs](https://github.com/NixOS/nixpkgs/blob/master/CONTRIBUTING.md)
 
 ## License
 MIT

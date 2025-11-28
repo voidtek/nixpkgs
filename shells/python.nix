@@ -6,6 +6,7 @@ pkgs.mkShellNoCC {
     pkgs.python3Packages.pip
     pkgs.python-launcher
     pkgs.python3Packages.pylint
+    pkgs.uv
     pkgs.python3Packages.jinja2
     pkgs.python3Packages.python-gitlab
     pkgs.python3Packages.requests
@@ -31,7 +32,7 @@ pkgs.mkShellNoCC {
     echo "╚═╝        ╚═╝      ╚═╝   ╚═╝  ╚═╝ ╚═════╝ ╚═╝  ╚═══╝"
     echo ""
     echo "Welcome to the Python development environment!"
-    echo "Available tools: wget, curl, shellcheck, unzip, htop, btop, nano, python3, pip, pylint + Python packages"
+    echo "Available tools: wget, curl, shellcheck, unzip, htop, btop, nano, ncdu, cacert, gnupg, git, python3, pip, uv, pylint + Python packages"
     echo ""
   '';
 }

@@ -1,0 +1,101 @@
+#!/usr/bin/env bash
+
+set -e
+
+echo "🚀 Installing Nix and dependencies..."
+echo "======================================"
+
+# Detect OS
+if [ -f /etc/os-release ]; then
+    . /etc/os-release
+    OS=$ID
+else
+    echo "❌ Cannot detect OS"
+    exit 1
+fi
+
+# Install Git if not present
+if ! command -v git &> /dev/null; then
+    echo "📦 Installing Git..."
+    case $OS in
+        ubuntu|debian)
+            sudo apt update && sudo apt install -y git curl
+            ;;
+        fedora|rhel|centos)
+            sudo dnf install -y git curl
+            ;;
+        arch|manjaro)
+            sudo pacman -S --noconfirm git curl
+            ;;
+        *)
+            echo "⚠️  Please install git manually for your OS"
+            exit 1
+            ;;
+    esac
+else
+    echo "✅ Git already installed"
+fi
+
+# Install Nix if not present
+if ! command -v nix &> /dev/null; then
+    echo "📦 Installing Nix package manager..."
+    curl -L https://nixos.org/nix/install | sh -s -- --daemon
+    
+    echo "⚙️  Enabling flakes..."
+    echo "experimental-features = nix-command flakes" | sudo tee -a /etc/nix/nix.conf
+    
+    if command -v systemctl &> /dev/null; then
+        sudo systemctl restart nix-daemon
+    fi
+    
+    echo "✅ Nix installed successfully"
+    echo "⚠️  Please restart your shell or run: source /etc/profile.d/nix.sh"
+else
+    echo "✅ Nix already installed"
+    
+    # Check if flakes are enabled
+    if ! grep -q "experimental-features.*flakes" /etc/nix/nix.conf 2>/dev/null; then
+        echo "⚙️  Enabling flakes..."
+        echo "experimental-features = nix-command flakes" | sudo tee -a /etc/nix/nix.conf
+        if command -v systemctl &> /dev/null; then
+            sudo systemctl restart nix-daemon
+        fi
+    fi
+fi
+
+# Optional: Install Docker
+read -p "📦 Install Docker? (y/N): " -n 1 -r
+echo
+if [[ $REPLY =~ ^[Yy]$ ]]; then
+    if ! command -v docker &> /dev/null; then
+        echo "📦 Installing Docker..."
+        case $OS in
+            ubuntu|debian)
+                sudo apt install -y docker.io
+                ;;
+            fedora|rhel|centos)
+                sudo dnf install -y docker
+                ;;
+            arch|manjaro)
+                sudo pacman -S --noconfirm docker
+                ;;
+            *)
+                echo "⚠️  Please install Docker manually for your OS"
+                ;;
+        esac
+        
+        if command -v systemctl &> /dev/null; then
+            sudo systemctl start docker
+            sudo systemctl enable docker
+        fi
+        
+        sudo usermod -aG docker $USER
+        echo "✅ Docker installed. Please logout/login for group changes"
+    else
+        echo "✅ Docker already installed"
+    fi
+fi
+
+echo ""
+echo "✨ Installation complete!"
+echo ""
