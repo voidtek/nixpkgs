@@ -42,6 +42,24 @@ nix develop .#devops     # DevOps/Infrastructure
 nix develop github:voidtek/nixpkgs#devops
 ```
 
+### Automatic Shell Activation
+
+To automatically load a Nix profile when entering this directory, use [direnv](https://direnv.net/):
+
+```bash
+# Install direnv
+nix profile install nixpkgs#direnv
+
+# Add to your shell config (~/.bashrc or ~/.zshrc)
+eval "$(direnv hook bash)"  # or: eval "$(direnv hook zsh)"
+
+# Create .envrc in your project
+echo "use flake github:voidtek/nixpkgs#devops" > .envrc
+direnv allow
+```
+
+Now the environment loads automatically when you cd into the directory.
+
 ## Requirements
 - Git installed
 - Nix package manager installed with flakes enabled
