@@ -15,6 +15,7 @@ pkgs.mkShellNoCC {
     pkgs.helm-docs
     pkgs.yamllint
     pkgs.awscli2
+    pkgs.renovate
   ];
 
   shellHook = ''
@@ -29,7 +30,7 @@ pkgs.mkShellNoCC {
     echo "╚═════╝ ╚══════╝  ╚═══╝   ╚═════╝ ╚═╝     ╚══════╝"
     echo ""
     echo "Welcome to the DevOps development environment!"
-    echo "Available tools: wget, curl, shellcheck, unzip, htop, btop, nano, cacert, gnupg, opentofu, kubectl, talosctl, k9s, jq, helm, tflint, terraform-docs, kube-score, kubeconform, helm-docs, yamllint, awscli"
+    echo "Available tools: wget, curl, shellcheck, unzip, htop, btop, nano, cacert, gnupg, opentofu, kubectl, talosctl, k9s, jq, helm, tflint, terraform-docs, kube-score, kubeconform, helm-docs, yamllint, awscli, renovate"
     echo ""
   '';
 }
