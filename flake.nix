@@ -22,10 +22,6 @@
           ncdu
           git
         ];
-        sshSetup = ''
-          eval "$(ssh-agent -s)" > /dev/null
-          ssh-add ~/.ssh/id_rsa 2>/dev/null
-        '';
         
         shellCustom = profileName: ''
           export NIXPKGS_PROFILE="${profileName}"
@@ -41,11 +37,11 @@
       in
       {
         devShells = {
-          default = import ./shells/default.nix { inherit pkgs defaultPackages sshSetup; shellCustom = shellCustom "default"; };
-          python = import ./shells/python.nix { inherit pkgs defaultPackages sshSetup; shellCustom = shellCustom "python"; };
-          docker = import ./shells/docker.nix { inherit pkgs defaultPackages sshSetup; shellCustom = shellCustom "docker"; };
-          hugo = import ./shells/hugo.nix { inherit pkgs defaultPackages sshSetup; shellCustom = shellCustom "hugo"; };
-          devops = import ./shells/devops.nix { inherit pkgs defaultPackages sshSetup; shellCustom = shellCustom "devops"; };
+          default = import ./shells/default.nix { inherit pkgs defaultPackages; shellCustom = shellCustom "default"; };
+          python = import ./shells/python.nix { inherit pkgs defaultPackages; shellCustom = shellCustom "python"; };
+          docker = import ./shells/docker.nix { inherit pkgs defaultPackages; shellCustom = shellCustom "docker"; };
+          hugo = import ./shells/hugo.nix { inherit pkgs defaultPackages; shellCustom = shellCustom "hugo"; };
+          devops = import ./shells/devops.nix { inherit pkgs defaultPackages; shellCustom = shellCustom "devops"; };
         };
       }
     );

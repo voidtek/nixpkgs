@@ -40,19 +40,19 @@ fi
 if ! command -v nix &> /dev/null; then
     echo "📦 Installing Nix package manager..."
     curl -L https://nixos.org/nix/install | sh -s -- --daemon
-    
+
     echo "⚙️  Enabling flakes..."
     echo "experimental-features = nix-command flakes" | sudo tee -a /etc/nix/nix.conf
-    
+
     if command -v systemctl &> /dev/null; then
         sudo systemctl restart nix-daemon
     fi
-    
+
     echo "✅ Nix installed successfully"
     echo "⚠️  Please restart your shell or run: source /etc/profile.d/nix.sh"
 else
     echo "✅ Nix already installed"
-    
+
     # Check if flakes are enabled
     if ! grep -q "experimental-features.*flakes" /etc/nix/nix.conf 2>/dev/null; then
         echo "⚙️  Enabling flakes..."
@@ -83,12 +83,12 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
                 echo "⚠️  Please install Docker manually for your OS"
                 ;;
         esac
-        
+
         if command -v systemctl &> /dev/null; then
             sudo systemctl start docker
             sudo systemctl enable docker
         fi
-        
+
         sudo usermod -aG docker $USER
         echo "✅ Docker installed. Please logout/login for group changes"
     else
@@ -96,6 +96,66 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
     fi
 fi
 
+# Install direnv and nix-direnv
+read -p "📦 Install direnv for automatic environment loading? (y/N): " -n 1 -r
+echo
+if [[ $REPLY =~ ^[Yy]$ ]]; then
+    echo "📦 Installing direnv and nix-direnv..."
+    nix profile add nixpkgs#direnv
+    nix profile add nixpkgs#nix-direnv
+
+    # Configure nix-direnv
+    mkdir -p ~/.config/direnv
+    echo 'source $HOME/.nix-profile/share/nix-direnv/direnvrc' > ~/.config/direnv/direnvrc
+
+    # Add direnv hook to shell config
+    SHELL_RC="$HOME/.bashrc"
+    if [ -n "$ZSH_VERSION" ]; then
+        SHELL_RC="$HOME/.zshrc"
+    fi
+
+    if ! grep -q "direnv hook" "$SHELL_RC" 2>/dev/null; then
+        echo 'eval "$(direnv hook bash)"' >> "$SHELL_RC"
+        echo "✅ Added direnv hook to $SHELL_RC"
+    fi
+
+    # Add DIRENV_LOG_FORMAT to reduce verbosity
+    if ! grep -q "DIRENV_LOG_FORMAT" "$SHELL_RC" 2>/dev/null; then
+        echo 'export DIRENV_LOG_FORMAT=""' >> "$SHELL_RC"
+    fi
+
+    echo "✅ direnv and nix-direnv installed"
+fi
+
+# Add SSH agent alias
+read -p "🔑 Add ssh-agent alias to shell config? (y/N): " -n 1 -r
+echo
+if [[ $REPLY =~ ^[Yy]$ ]]; then
+    SHELL_RC="$HOME/.bashrc"
+    if [ -n "$ZSH_VERSION" ]; then
+        SHELL_RC="$HOME/.zshrc"
+    fi
+
+    if ! grep -q "ssh-start" "$SHELL_RC" 2>/dev/null; then
+        cat >> "$SHELL_RC" << 'EOF'
+
+# SSH agent alias
+alias ssh-start='eval "$(ssh-agent -s)" && ssh-add ~/.ssh/id_rsa'
+EOF
+        echo "✅ Added ssh-start alias to $SHELL_RC"
+        echo "   Use 'ssh-start' to start ssh-agent and add your key"
+    else
+        echo "✅ ssh-start alias already exists"
+    fi
+fi
+
 echo ""
 echo "✨ Installation complete!"
+echo ""
+echo "Next steps:"
+echo "1. Restart your shell or run: source ~/.bashrc"
+echo "2. Test with: nix develop github:voidtek/nixpkgs#devops"
+if [[ $REPLY =~ ^[Yy]$ ]]; then
+    echo "3. Use 'ssh-start' to start ssh-agent"
+fi
 echo ""

@@ -1,4 +1,4 @@
-{ pkgs, defaultPackages, sshSetup, shellCustom }:
+{ pkgs, defaultPackages, shellCustom }:
 
 pkgs.mkShellNoCC {
   packages = defaultPackages ++ [
@@ -19,8 +19,8 @@ pkgs.mkShellNoCC {
   ];
 
   shellHook = ''
-    ${sshSetup}
     ${shellCustom}
+    
     echo ""
     echo "██████╗ ███████╗██╗   ██╗ ██████╗ ██████╗ ███████╗"
     echo "██╔══██╗██╔════╝██║   ██║██╔═══██╗██╔══██╗██╔════╝"

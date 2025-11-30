@@ -30,6 +30,22 @@ Static site generation with Hugo
 Infrastructure and DevOps toolchain
 
 ## Usage
+
+### Quick Start (From GitHub)
+
+Use directly from GitHub without cloning:
+
+```bash
+# Run a shell directly from GitHub
+nix develop github:voidtek/nixpkgs#devops
+nix develop github:voidtek/nixpkgs#python
+nix develop github:voidtek/nixpkgs#docker
+```
+
+### Local Development
+
+If you've cloned this repository:
+
 ```bash
 # Available profiles
 nix develop .#default    # Basic tools
@@ -37,31 +53,83 @@ nix develop .#python     # Python development
 nix develop .#docker     # Docker tools
 nix develop .#hugo       # Hugo static sites
 nix develop .#devops     # DevOps/Infrastructure
-
-# Or run directly from GitHub
-nix develop github:voidtek/nixpkgs#devops
 ```
 
-### Automatic Shell Activation
+### Automatic Shell Activation with direnv
 
-To automatically load a Nix profile when entering this directory, use [direnv](https://direnv.net/):
+Automatically load environments when entering directories:
+
+#### For Your Own Projects (Using GitHub)
 
 ```bash
-# Install direnv
-nix profile install nixpkgs#direnv
+# Install direnv and nix-direnv
+nix profile add nixpkgs#direnv
+nix profile add nixpkgs#nix-direnv
+
+# Configure nix-direnv
+mkdir -p ~/.config/direnv
+echo 'source $HOME/.nix-profile/share/nix-direnv/direnvrc' > ~/.config/direnv/direnvrc
 
 # Add to your shell config (~/.bashrc or ~/.zshrc)
 eval "$(direnv hook bash)"  # or: eval "$(direnv hook zsh)"
 
-# Create .envrc in your project
+# In your project directory, create .envrc
 echo "use flake github:voidtek/nixpkgs#devops" > .envrc
 direnv allow
 ```
 
-Now the environment loads automatically when you cd into the directory.
+#### For Local Development (This Repository)
+
+```bash
+# Same setup as above, but use local path
+echo "use flake .#devops" > .envrc
+direnv allow
+```
+
+The first load takes a few minutes, subsequent loads are instant thanks to nix-direnv caching.
+
+#### Clear Cache
+
+```bash
+# Clear nix-direnv cache
+rm -rf ~/.cache/nix-direnv/*
+
+# Reload environment
+direnv reload
+```
+
+## Use Cases
+
+### Use Case 1: Quick DevOps Shell
+
+Run a DevOps environment without any installation:
+
+```bash
+nix develop github:voidtek/nixpkgs#devops
+```
+
+### Use Case 2: Project-Specific Environment
+
+Add to any project for consistent tooling:
+
+```bash
+cd ~/my-project
+echo "use flake github:voidtek/nixpkgs#devops" > .envrc
+direnv allow
+```
+
+### Use Case 3: Custom Development
+
+Clone and modify for your needs:
+
+```bash
+git clone https://github.com/voidtek/nixpkgs.git
+cd nixpkgs
+# Edit shells/*.nix files
+nix develop .#devops
+```
 
 ## Requirements
-- Git installed
 - Nix package manager installed with flakes enabled
 - x86_64-linux or aarch64-linux system
 - Docker daemon running (for docker profile)
@@ -138,6 +206,7 @@ See [scripts/README.md](scripts/README.md) for detailed usage instructions.
 📦 helm-docs: 1.14.2
 📦 yamllint: 1.37.1
 📦 awscli2: 2.31.11
+📦 renovate: 39.126.0
 ```
 
 ## Contributing
