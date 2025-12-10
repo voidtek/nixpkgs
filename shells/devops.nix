@@ -16,6 +16,7 @@ pkgs.mkShellNoCC {
     pkgs.yamllint
     pkgs.awscli2
     pkgs.renovate
+    pkgs.glab
   ];
 
   shellHook = ''
