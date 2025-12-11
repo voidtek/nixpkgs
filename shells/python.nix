@@ -1,4 +1,4 @@
-{ pkgs, defaultPackages, shellCustom }:
+{ pkgs, defaultPackages, shellCustom, fishLaunch }:
 
 pkgs.mkShellNoCC {
   packages = defaultPackages ++ [
@@ -33,5 +33,7 @@ pkgs.mkShellNoCC {
     echo "Welcome to the Python development environment!"
     echo "Available tools: wget, curl, shellcheck, unzip, htop, btop, nano, ncdu, cacert, gnupg, git, python3, pip, uv, pylint + Python packages"
     echo ""
+
+    ${fishLaunch}
   '';
 }

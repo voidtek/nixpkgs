@@ -1,4 +1,4 @@
-{ pkgs, defaultPackages, shellCustom }:
+{ pkgs, defaultPackages, shellCustom, fishLaunch }:
 
 pkgs.mkShellNoCC {
   packages = defaultPackages ++ [
@@ -20,5 +20,7 @@ pkgs.mkShellNoCC {
     echo "Welcome to the Docker development environment!"
     echo "Available tools: wget, curl, shellcheck, unzip, htop, btop, nano, docker, docker-compose, docker-buildx"
     echo ""
+
+    ${fishLaunch}
   '';
 }
