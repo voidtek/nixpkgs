@@ -38,18 +38,11 @@ fi
 
 # Install Nix if not present
 if ! command -v nix &> /dev/null; then
-    echo "📦 Installing Nix package manager..."
-    curl -L https://nixos.org/nix/install | sh -s -- --daemon
+    echo "📦 Installing Nix package manager with Determinate Systems installer..."
+    curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix | sh -s -- install
 
-    echo "⚙️  Enabling flakes..."
-    echo "experimental-features = nix-command flakes" | sudo tee -a /etc/nix/nix.conf
-
-    if command -v systemctl &> /dev/null; then
-        sudo systemctl restart nix-daemon
-    fi
-
-    echo "✅ Nix installed successfully"
-    echo "⚠️  Please restart your shell or run: source /etc/profile.d/nix.sh"
+    echo "✅ Nix installed successfully (flakes enabled by default)"
+    echo "⚠️  Please restart your shell or run: . /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh"
 else
     echo "✅ Nix already installed"
 
