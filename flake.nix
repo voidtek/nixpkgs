@@ -10,6 +10,7 @@
         pkgs = nixpkgs.legacyPackages.${system};
         
         defaultPackages = with pkgs; [
+          fish
           wget
           curl
           shellcheck
@@ -32,6 +33,11 @@
             export PS1="\[\033[90m\][$NIXPKGS_PROFILE]\[\033[0m\] $PS1"
           else
             export PS1="[$NIXPKGS_PROFILE] $PS1"
+          fi
+          
+          # Launch Fish if available and not already in Fish
+          if command -v fish >/dev/null 2>&1 && [ "$SHELL" != "$(command -v fish)" ]; then
+            exec fish
           fi
         '';
       in
