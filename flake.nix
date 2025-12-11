@@ -8,7 +8,7 @@
     flake-utils.lib.eachDefaultSystem (system:
       let
         pkgs = nixpkgs.legacyPackages.${system};
-        
+
         defaultPackages = with pkgs; [
           fish
           wget
@@ -23,7 +23,7 @@
           ncdu
           git
         ];
-        
+
         shellCustom = profileName: ''
           export NIXPKGS_PROFILE="${profileName}"
           case "$TERM" in
@@ -34,7 +34,9 @@
           else
             export PS1="[$NIXPKGS_PROFILE] $PS1"
           fi
-          
+        '';
+
+        fishLaunch = ''
           # Launch Fish if available and not already in Fish
           if command -v fish >/dev/null 2>&1 && [ "$SHELL" != "$(command -v fish)" ]; then
             exec fish
@@ -43,11 +45,12 @@
       in
       {
         devShells = {
-          default = import ./shells/default.nix { inherit pkgs defaultPackages; shellCustom = shellCustom "default"; };
-          python = import ./shells/python.nix { inherit pkgs defaultPackages; shellCustom = shellCustom "python"; };
-          docker = import ./shells/docker.nix { inherit pkgs defaultPackages; shellCustom = shellCustom "docker"; };
-          hugo = import ./shells/hugo.nix { inherit pkgs defaultPackages; shellCustom = shellCustom "hugo"; };
-          devops = import ./shells/devops.nix { inherit pkgs defaultPackages; shellCustom = shellCustom "devops"; };
+          default = import ./shells/default.nix { inherit pkgs defaultPackages; shellCustom = shellCustom "default"; inherit fishLaunch; };
+          python = import ./shells/python.nix { inherit pkgs defaultPackages; shellCustom = shellCustom "python"; inherit fishLaunch; };
+          docker = import ./shells/docker.nix { inherit pkgs defaultPackages; shellCustom = shellCustom "docker"; inherit fishLaunch; };
+          hugo = import ./shells/hugo.nix { inherit pkgs defaultPackages; shellCustom = shellCustom "hugo"; inherit fishLaunch; };
+          devops = import ./shells/devops.nix { inherit pkgs defaultPackages; shellCustom = shellCustom "devops"; inherit fishLaunch; };
+          ai = import ./shells/ai.nix { inherit pkgs defaultPackages; shellCustom = shellCustom "ai"; inherit fishLaunch; };
         };
       }
     );

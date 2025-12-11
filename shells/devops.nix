@@ -1,4 +1,4 @@
-{ pkgs, defaultPackages, shellCustom }:
+{ pkgs, defaultPackages, shellCustom, fishLaunch }:
 
 pkgs.mkShellNoCC {
   packages = defaultPackages ++ [
@@ -21,7 +21,7 @@ pkgs.mkShellNoCC {
 
   shellHook = ''
     ${shellCustom}
-    
+
     echo ""
     echo "██████╗ ███████╗██╗   ██╗ ██████╗ ██████╗ ███████╗"
     echo "██╔══██╗██╔════╝██║   ██║██╔═══██╗██╔══██╗██╔════╝"
@@ -33,5 +33,7 @@ pkgs.mkShellNoCC {
     echo "Welcome to the DevOps development environment!"
     echo "Available tools: wget, curl, shellcheck, unzip, htop, btop, nano, cacert, gnupg, opentofu, kubectl, talosctl, k9s, jq, helm, tflint, terraform-docs, kube-score, kubeconform, helm-docs, yamllint, awscli, renovate"
     echo ""
+
+    ${fishLaunch}
   '';
 }

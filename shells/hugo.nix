@@ -6,7 +6,7 @@ pkgs.mkShellNoCC {
     pkgs.nodejs
     pkgs.go
   ];
-  
+
   shellHook = ''
     ${shellCustom}
     echo ""
