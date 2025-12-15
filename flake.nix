@@ -22,6 +22,7 @@
           gnupg
           ncdu
           git
+          neofetch
           (writeShellScriptBin "nixhelp" (builtins.readFile ./scripts/nixhelp))
           (writeShellScriptBin "nix-default" (builtins.readFile ./scripts/nix-default))
           (writeShellScriptBin "nix-python" (builtins.readFile ./scripts/nix-python))
