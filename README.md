@@ -39,54 +39,43 @@ cd nixpkgs
 nix develop .#devops
 ```
 
-### Auto-activation with direnv
-```bash
-# Setup (one-time)
-nix profile add nixpkgs#{direnv,nix-direnv}
-mkdir -p ~/.config/direnv
-echo 'source $HOME/.nix-profile/share/nix-direnv/direnvrc' > ~/.config/direnv/direnvrc
-eval "$(direnv hook bash)"  # Add to ~/.bashrc
-
-# Per project
-echo "use flake github:voidtek/nixpkgs#devops" > .envrc
-direnv allow
-```
-
-## 💡 Examples
-
-**DevOps workflow:**
-```bash
-nix develop github:voidtek/nixpkgs#devops
-terraform init
-kubectl get pods
-```
-
-**Python project:**
-```bash
-nix develop github:voidtek/nixpkgs#python
-python -m venv .venv
-source .venv/bin/activate
-pip install -r requirements.txt
-```
-
-**Hugo site:**
-```bash
-nix develop github:voidtek/nixpkgs#hugo
-hugo new site mysite
-cd mysite
-hugo server
-```
-
 ## 🔧 Requirements
 
 - **Nix** with flakes enabled
 - **Linux** (x86_64 or aarch64)
 - **Docker** daemon (for docker profile)
 
-### Install Nix
+### Installation
+
+**Basic packages:**
 ```bash
-# Quick install
-curl -fsSL https://raw.githubusercontent.com/voidtek/nixpkgs/main/scripts/install.sh | bash
+sudo apt update && sudo apt install -y curl git
+```
+
+**Install Nix:**
+```bash
+curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix | sh -s -- install
+```
+
+**Install Docker:**
+```bash
+curl -fsSL https://get.docker.com | sh
+sudo usermod -aG docker $USER
+newgrp docker
+```
+
+### Optional: Shell Aliases
+
+Add these aliases to your `~/.bashrc` for quick environment switching:
+
+```bash
+# Nix development environments
+alias nix-default='nix develop github:voidtek/nixpkgs#default'
+alias nix-python='nix develop github:voidtek/nixpkgs#python'
+alias nix-docker='nix develop github:voidtek/nixpkgs#docker'
+alias nix-hugo='nix develop github:voidtek/nixpkgs#hugo'
+alias nix-devops='nix develop github:voidtek/nixpkgs#devops'
+alias nix-ai='nix develop github:voidtek/nixpkgs#ai'
 ```
 
 ## 🤝 Contributing

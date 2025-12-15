@@ -24,12 +24,6 @@
           git
           neofetch
           (writeShellScriptBin "nixhelp" (builtins.readFile ./scripts/nixhelp))
-          (writeShellScriptBin "nix-default" (builtins.readFile ./scripts/nix-default))
-          (writeShellScriptBin "nix-python" (builtins.readFile ./scripts/nix-python))
-          (writeShellScriptBin "nix-docker" (builtins.readFile ./scripts/nix-docker))
-          (writeShellScriptBin "nix-hugo" (builtins.readFile ./scripts/nix-hugo))
-          (writeShellScriptBin "nix-devops" (builtins.readFile ./scripts/nix-devops))
-          (writeShellScriptBin "nix-ai" (builtins.readFile ./scripts/nix-ai))
         ];
 
         shellCustom = profileName: ''
