@@ -17,6 +17,8 @@ pkgs.mkShellNoCC {
     pkgs.awscli2
     pkgs.renovate
     pkgs.glab
+    pkgs.jsonnet
+    pkgs.jsonnet-bundler
   ];
 
   shellHook = ''
