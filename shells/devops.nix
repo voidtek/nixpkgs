@@ -19,6 +19,7 @@ pkgs.mkShellNoCC {
     pkgs.glab
     pkgs.jsonnet
     pkgs.jsonnet-bundler
+    pkgs.dnsutils
   ];
 
   shellHook = ''
