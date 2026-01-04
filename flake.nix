@@ -7,14 +7,13 @@
   outputs = { self, nixpkgs, flake-utils }:
     flake-utils.lib.eachDefaultSystem (system:
       let
-        pkgs = nixpkgs.legacyPackages.${system}.extend (final: prev: {
-          config = {
-            allowUnfree = true;
-          };
-        });
+        pkgs = nixpkgs.legacyPackages.${system};
         pkgsUnfree = import nixpkgs {
           inherit system;
-          config.allowUnfree = true;
+          config = {
+            allowUnfree = true;
+            allowAliases = true;
+          };
         };
 
         defaultPackages = with pkgs; [
