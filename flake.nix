@@ -53,6 +53,7 @@
           hugo = import ./shells/hugo.nix { inherit pkgs defaultPackages; shellCustom = shellCustom "hugo"; inherit fishLaunch; };
           devops = import ./shells/devops.nix { inherit pkgs defaultPackages; shellCustom = shellCustom "devops"; inherit fishLaunch; };
           ai = import ./shells/ai.nix { inherit pkgs defaultPackages; shellCustom = shellCustom "ai"; inherit fishLaunch; };
+          kotlin = import ./shells/kotlin.nix { inherit pkgs defaultPackages; shellCustom = shellCustom "kotlin"; inherit fishLaunch; };
         };
       }
     );

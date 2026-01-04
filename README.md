@@ -22,6 +22,7 @@ nix develop github:voidtek/nixpkgs#docker
 | **docker** | Containerization | `docker` `docker-compose` `buildx` |
 | **hugo** | Static sites | `hugo` `nodejs` `go` `git` |
 | **devops** | Infrastructure | `terraform` `kubectl` `helm` `aws-cli` `k9s` |
+| **kotlin** | Kotlin development | `kotlin` `gradle` `openjdk21` `android-studio` |
 
 ## 🚀 Usage
 
@@ -75,6 +76,7 @@ alias nix-python='nix develop github:voidtek/nixpkgs#python'
 alias nix-docker='nix develop github:voidtek/nixpkgs#docker'
 alias nix-hugo='nix develop github:voidtek/nixpkgs#hugo'
 alias nix-devops='nix develop github:voidtek/nixpkgs#devops'
+alias nix-kotlin='nix develop github:voidtek/nixpkgs#kotlin'
 alias nix-ai='nix develop github:voidtek/nixpkgs#ai'
 ```
 
