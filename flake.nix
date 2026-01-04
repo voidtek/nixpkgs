@@ -7,7 +7,15 @@
   outputs = { self, nixpkgs, flake-utils }:
     flake-utils.lib.eachDefaultSystem (system:
       let
-        pkgs = nixpkgs.legacyPackages.${system};
+        pkgs = nixpkgs.legacyPackages.${system}.extend (final: prev: {
+          config = {
+            allowUnfree = true;
+          };
+        });
+        pkgsUnfree = import nixpkgs {
+          inherit system;
+          config.allowUnfree = true;
+        };
 
         defaultPackages = with pkgs; [
           fish
@@ -53,7 +61,7 @@
           hugo = import ./shells/hugo.nix { inherit pkgs defaultPackages; shellCustom = shellCustom "hugo"; inherit fishLaunch; };
           devops = import ./shells/devops.nix { inherit pkgs defaultPackages; shellCustom = shellCustom "devops"; inherit fishLaunch; };
           ai = import ./shells/ai.nix { inherit pkgs defaultPackages; shellCustom = shellCustom "ai"; inherit fishLaunch; };
-          kotlin = import ./shells/kotlin.nix { inherit pkgs defaultPackages; shellCustom = shellCustom "kotlin"; inherit fishLaunch; };
+          kotlin = import ./shells/kotlin.nix { pkgs = pkgsUnfree; inherit defaultPackages; shellCustom = shellCustom "kotlin"; inherit fishLaunch; };
         };
       }
     );
