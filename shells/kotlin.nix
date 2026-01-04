@@ -6,6 +6,7 @@ pkgs.mkShellNoCC {
     pkgs.gradle
     pkgs.openjdk21
     pkgs.android-studio
+    pkgs.android-tools
   ];
 
   shellHook = ''
@@ -19,7 +20,7 @@ pkgs.mkShellNoCC {
     echo "╚═╝  ╚═╝ ╚═════╝    ╚═╝   ╚══════╝╚═╝╚═╝  ╚═══╝"
     echo ""
     echo "Welcome to the Kotlin development environment!"
-    echo "Available tools: wget, curl, shellcheck, unzip, htop, btop, nano, ncdu, cacert, gnupg, git, kotlin, gradle, openjdk21, android-studio"
+    echo "Available tools: wget, curl, shellcheck, unzip, htop, btop, nano, ncdu, cacert, gnupg, git, kotlin, gradle, openjdk21, android-studio, android-tools"
     echo ""
 
     ${fishLaunch}
