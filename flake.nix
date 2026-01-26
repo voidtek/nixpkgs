@@ -30,6 +30,7 @@
           ncdu
           git
           neofetch
+          nodejs
           (writeShellScriptBin "nixhelp" (builtins.readFile ./scripts/nixhelp))
         ];
 
