@@ -31,6 +31,7 @@
           git
           neofetch
           nodejs
+          yq
           (writeShellScriptBin "nixhelp" (builtins.readFile ./scripts/nixhelp))
         ];
 
