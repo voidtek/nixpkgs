@@ -19,7 +19,6 @@ pkgs.mkShellNoCC {
     echo "╚═════╝  ╚═════╝  ╚═════╝╚═╝   ╚═╝╚══════╝╚═╝  ╚═╝"
     echo ""
     echo "Welcome to the Docker development environment!"
-    echo "Available tools: wget, curl, shellcheck, unzip, htop, btop, nano, docker, docker-compose, docker-buildx, hadolint"
     echo ""
 
     ${fishLaunch}

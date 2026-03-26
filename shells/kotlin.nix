@@ -28,8 +28,6 @@ pkgs.mkShellNoCC {
     echo "╚═╝  ╚═╝ ╚═════╝    ╚═╝   ╚══════╝╚═╝╚═╝  ╚═══╝"
     echo ""
     echo "Welcome to the Kotlin development environment!"
-    echo "Available tools: wget, curl, shellcheck, unzip, htop, btop, nano, ncdu, cacert, gnupg, git, kotlin, gradle, openjdk21, android-studio, android-tools"
-    echo "Android SDK licenses automatically accepted"
     echo ""
 
     ${fishLaunch}

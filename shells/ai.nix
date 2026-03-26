@@ -26,7 +26,6 @@ pkgs.mkShellNoCC {
     echo "╚═╝  ╚═╝╚═╝"
     echo ""
     echo "Welcome to the AI development environment!"
-    echo "Available tools: python3, pip, uv, uvx, jupyter, numpy, pandas, matplotlib, scikit-learn, openai"
     echo ""
 
     ${fishLaunch}

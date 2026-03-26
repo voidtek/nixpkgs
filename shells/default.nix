@@ -1,11 +1,11 @@
 { pkgs, defaultPackages, shellCustom, fishLaunch }:
 
 pkgs.mkShellNoCC {
-  packages = defaultPackages ++ [ pkgs.fish ];
+  packages = defaultPackages;
 
   shellHook = ''
     ${shellCustom}
-    echo "Basic shell with wget, curl, shellcheck, unzip, htop, btop, nano, cacert, gnupg, ncdu, git, kiro-cli available"
+    echo "Welcome to the default development environment!"
 
     ${fishLaunch}
   '';

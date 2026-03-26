@@ -31,7 +31,6 @@ pkgs.mkShellNoCC {
     echo "╚═╝        ╚═╝      ╚═╝   ╚═╝  ╚═╝ ╚═════╝ ╚═╝  ╚═══╝"
     echo ""
     echo "Welcome to the Python development environment!"
-    echo "Available tools: wget, curl, shellcheck, unzip, htop, btop, nano, ncdu, cacert, gnupg, git, python3, pip, uv, pylint + Python packages"
     echo ""
 
     ${fishLaunch}
