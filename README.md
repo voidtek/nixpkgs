@@ -15,14 +15,17 @@ nix develop github:voidtek/nixpkgs#docker
 
 ## 🎯 Environments
 
-| Environment | Purpose | Tools |
-|-------------|---------|-------|
-| **default** | Basic dev tools | `git` `curl` `htop` `shellcheck` `nano` |
-| **python** | Python development | `python3` `pip` `uv` `pylint` `black` |
-| **docker** | Containerization | `docker` `docker-compose` `buildx` |
-| **hugo** | Static sites | `hugo` `nodejs` `go` `git` |
-| **devops** | Infrastructure | `terraform` `kubectl` `helm` `aws-cli` `k9s` |
-| **kotlin** | Kotlin development | `kotlin` `gradle` `openjdk21` `android-studio` |
+All environments include common tools: `fish` `git` `curl` `wget` `htop` `btop` `nano` `shellcheck` `unzip` `gnupg` `ncdu` `neofetch` `nodejs` `yq` `bitwarden-cli`
+
+| Environment | Purpose | Additional Tools |
+|-------------|---------|-----------------|
+| **default** | Basic dev tools | — |
+| **python** | Python development | `python3` `pip` `uv` `pylint` `jinja2` `boto3` `pygithub` `beautifulsoup4` `gitpython` |
+| **docker** | Containerization | `docker` `docker-compose` `docker-buildx` `hadolint` |
+| **web** | Web & static sites | `hugo` `nodejs` `go` `libwebp` `imagemagick` |
+| **devops** | Infrastructure | `opentofu` `kubectl` `talosctl` `k9s` `helm` `awscli2` `renovate` `updatecli` `glab` `jsonnet` `nmap` |
+| **ai** | AI/ML development | `python3` `jupyter` `numpy` `pandas` `matplotlib` `scikit-learn` `openai` |
+| **kotlin** | Kotlin development | `kotlin` `gradle` `openjdk21` `android-studio` `android-tools` |
 
 ## 🚀 Usage
 
@@ -74,10 +77,10 @@ Add these aliases to your `~/.bashrc` for quick environment switching:
 alias nix-default='nix develop github:voidtek/nixpkgs#default'
 alias nix-python='nix develop github:voidtek/nixpkgs#python'
 alias nix-docker='nix develop github:voidtek/nixpkgs#docker'
-alias nix-hugo='nix develop github:voidtek/nixpkgs#hugo'
+alias nix-web='nix develop github:voidtek/nixpkgs#web'
 alias nix-devops='nix develop github:voidtek/nixpkgs#devops'
-alias nix-kotlin='nix develop github:voidtek/nixpkgs#kotlin'
 alias nix-ai='nix develop github:voidtek/nixpkgs#ai'
+alias nix-kotlin='nix develop github:voidtek/nixpkgs#kotlin'
 ```
 
 ## 🤝 Contributing
