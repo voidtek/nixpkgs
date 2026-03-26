@@ -32,7 +32,6 @@
           neofetch
           nodejs
           yq
-          awscli2
           bitwarden-cli
           (writeShellScriptBin "nixhelp" (builtins.readFile ./scripts/nixhelp))
         ];
