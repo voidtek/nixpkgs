@@ -60,7 +60,7 @@
           default = import ./shells/default.nix { inherit pkgs defaultPackages; shellCustom = shellCustom "default"; inherit fishLaunch; };
           python = import ./shells/python.nix { inherit pkgs defaultPackages; shellCustom = shellCustom "python"; inherit fishLaunch; };
           docker = import ./shells/docker.nix { inherit pkgs defaultPackages; shellCustom = shellCustom "docker"; inherit fishLaunch; };
-          hugo = import ./shells/hugo.nix { inherit pkgs defaultPackages; shellCustom = shellCustom "hugo"; inherit fishLaunch; };
+          web = import ./shells/web.nix { inherit pkgs defaultPackages; shellCustom = shellCustom "web"; inherit fishLaunch; };
           devops = import ./shells/devops.nix { inherit pkgs defaultPackages; shellCustom = shellCustom "devops"; inherit fishLaunch; };
           ai = import ./shells/ai.nix { inherit pkgs defaultPackages; shellCustom = shellCustom "ai"; inherit fishLaunch; };
           kotlin = import ./shells/kotlin.nix { pkgs = pkgsUnfree; inherit defaultPackages; shellCustom = shellCustom "kotlin"; inherit fishLaunch; };
