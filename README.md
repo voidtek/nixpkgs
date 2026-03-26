@@ -15,8 +15,6 @@ nix develop github:voidtek/nixpkgs#docker
 
 ## 🎯 Environments
 
-All environments include common tools: `fish` `git` `curl` `wget` `htop` `btop` `nano` `shellcheck` `unzip` `gnupg` `ncdu` `neofetch` `nodejs` `yq` `bitwarden-cli`
-
 | Environment | Purpose | Additional Tools |
 |-------------|---------|-----------------|
 | **default** | Basic dev tools | — |

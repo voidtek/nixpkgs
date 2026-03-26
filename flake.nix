@@ -29,7 +29,7 @@
           gnupg
           ncdu
           git
-          neofetch
+          fastfetch
           nodejs
           yq
           bitwarden-cli
