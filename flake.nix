@@ -33,6 +33,9 @@
           nodejs
           yq
           bitwarden-cli
+          python3
+          python3Packages.pip
+          uv
           (writeShellScriptBin "nixhelp" (builtins.readFile ./scripts/nixhelp))
         ];
 

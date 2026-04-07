@@ -2,9 +2,6 @@
 
 pkgs.mkShellNoCC {
   packages = defaultPackages ++ [
-    pkgs.python3
-    pkgs.python3Packages.pip
-    pkgs.uv
     pkgs.python3Packages.jupyter
     pkgs.python3Packages.numpy
     pkgs.python3Packages.pandas

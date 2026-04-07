@@ -2,11 +2,8 @@
 
 pkgs.mkShellNoCC {
   packages = defaultPackages ++ [
-    pkgs.python3
-    pkgs.python3Packages.pip
     pkgs.python-launcher
     pkgs.python3Packages.pylint
-    pkgs.uv
     pkgs.python3Packages.jinja2
     pkgs.python3Packages.python-gitlab
     pkgs.python3Packages.requests
