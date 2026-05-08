@@ -3,7 +3,7 @@
 pkgs.mkShellNoCC {
   packages = defaultPackages ++ [
     pkgs.osv-scanner
-    pkgs.python3Packages.pip-audit
+    pkgs.pip-audit
   ];
 
   shellHook = ''
