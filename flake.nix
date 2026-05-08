@@ -66,6 +66,7 @@
           web = import ./shells/web.nix { inherit pkgs defaultPackages; shellCustom = shellCustom "web"; inherit fishLaunch; };
           devops = import ./shells/devops.nix { inherit pkgs defaultPackages; shellCustom = shellCustom "devops"; inherit fishLaunch; };
           ai = import ./shells/ai.nix { inherit pkgs defaultPackages; shellCustom = shellCustom "ai"; inherit fishLaunch; };
+          security = import ./shells/security.nix { inherit pkgs defaultPackages; shellCustom = shellCustom "security"; inherit fishLaunch; };
           kotlin = import ./shells/kotlin.nix { pkgs = pkgsUnfree; inherit defaultPackages; shellCustom = shellCustom "kotlin"; inherit fishLaunch; };
         };
       }

@@ -24,6 +24,7 @@ nix develop github:voidtek/nixpkgs#docker
 | **devops** | Infrastructure | `opentofu` `kubectl` `talosctl` `k9s` `helm` `awscli2` `renovate` `updatecli` `glab` `jsonnet` `nmap` |
 | **ai** | AI/ML development | `python3` `jupyter` `numpy` `pandas` `matplotlib` `scikit-learn` `openai` |
 | **kotlin** | Kotlin development | `kotlin` `gradle` `openjdk21` `android-studio` `android-tools` |
+| **security** | Security auditing | `osv-scanner` `pip-audit` |
 
 ## 🚀 Usage
 
@@ -79,6 +80,7 @@ alias nix-web='nix develop github:voidtek/nixpkgs#web'
 alias nix-devops='nix develop github:voidtek/nixpkgs#devops'
 alias nix-ai='nix develop github:voidtek/nixpkgs#ai'
 alias nix-kotlin='nix develop github:voidtek/nixpkgs#kotlin'
+alias nix-security='nix develop github:voidtek/nixpkgs#security'
 ```
 
 ## 🤝 Contributing
