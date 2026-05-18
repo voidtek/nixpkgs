@@ -6,6 +6,7 @@ pkgs.mkShellNoCC {
     pkgs.docker-compose
     pkgs.docker-buildx
     pkgs.hadolint
+    pkgs.crane
   ];
 
   shellHook = ''
