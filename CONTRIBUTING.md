@@ -37,8 +37,11 @@
 nix develop .#default
 nix develop .#python
 nix develop .#docker
-nix develop .#hugo
+nix develop .#web
 nix develop .#devops
+nix develop .#ai
+nix develop .#kotlin
+nix develop .#security
 ```
 
 ## 📋 Pull Request Process
