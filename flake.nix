@@ -170,11 +170,19 @@
 
           formatter = pkgs.nixfmt;
 
-          # `nix flake check` builds this to ensure flake.nix stays formatted.
-          checks.formatting = pkgs.runCommand "check-formatting" { nativeBuildInputs = [ pkgs.nixfmt ]; } ''
-            nixfmt --check ${./flake.nix}
-            touch $out
-          '';
+          # The formatting check only reads a text file, so it is completely
+          # platform-independent. Defining it per-system would force
+          # `nix flake check --all-systems` to *build* the aarch64 variant on
+          # the x86_64 CI runner, which fails with a platform mismatch (there
+          # is no emulation or remote builder). Pin it to x86_64-linux so it is
+          # built exactly once, on the system CI actually runs on.
+          checks = lib.optionalAttrs (system == "x86_64-linux") {
+            # `nix flake check` builds this to ensure flake.nix stays formatted.
+            formatting = pkgs.runCommand "check-formatting" { nativeBuildInputs = [ pkgs.nixfmt ]; } ''
+              nixfmt --check ${./flake.nix}
+              touch $out
+            '';
+          };
         }
       );
 }
