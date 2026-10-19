@@ -1,0 +1,75 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+# Cancel superseded runs on the same ref to save CI minutes.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  checks:
+    name: Nix flake checks
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install Nix
+        uses: DeterminateSystems/nix-installer-action@main
+
+      - name: Check flake.lock health
+        uses: DeterminateSystems/flake-checker-action@main
+
+      - name: Run flake checks
+        # Evaluates every dev shell and runs the `checks` outputs
+        # (including the formatting check) across supported systems.
+        run: nix flake check --all-systems --print-build-logs
+
+  discover:
+    name: Discover dev shells
+    runs-on: ubuntu-latest
+    outputs:
+      profiles: ${{ steps.list.outputs.profiles }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install Nix
+        uses: DeterminateSystems/nix-installer-action@main
+
+      - name: List dev shells for the current system
+        id: list
+        # Build the matrix from the flake itself so CI never drifts from the
+        # profiles defined in flake.nix.
+        run: |
+          system="$(nix eval --raw --impure --expr 'builtins.currentSystem')"
+          profiles="$(nix eval --json ".#devShells.${system}" \
+            --apply 'builtins.attrNames')"
+          echo "profiles=${profiles}" >>"$GITHUB_OUTPUT"
+
+  build-shells:
+    name: Build dev shell (${{ matrix.profile }})
+    needs: discover
+    runs-on: ubuntu-latest
+    strategy:
+      # Keep building the other profiles even if one fails.
+      fail-fast: false
+      matrix:
+        profile: ${{ fromJSON(needs.discover.outputs.profiles) }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install Nix
+        uses: DeterminateSystems/nix-installer-action@main
+
+      - name: Build ${{ matrix.profile }} dev shell
+        run: nix develop ".#${{ matrix.profile }}" --command true

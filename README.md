@@ -15,16 +15,20 @@ nix develop github:voidtek/nixpkgs#docker
 
 ## 🎯 Environments
 
+All environments also include a set of **common tools** (see below).
+
 | Environment | Purpose | Additional Tools |
 |-------------|---------|-----------------|
 | **default** | Basic dev tools | — |
-| **python** | Python development | `python3` `pip` `uv` `pylint` `jinja2` `boto3` `pygithub` `beautifulsoup4` `gitpython` |
-| **docker** | Containerization | `docker` `docker-compose` `docker-buildx` `hadolint` |
-| **web** | Web & static sites | `hugo` `nodejs` `go` `libwebp` `imagemagick` |
-| **devops** | Infrastructure | `opentofu` `kubectl` `talosctl` `k9s` `helm` `awscli2` `renovate` `updatecli` `glab` `jsonnet` `nmap` |
-| **ai** | AI/ML development | `python3` `jupyter` `numpy` `pandas` `matplotlib` `scikit-learn` `openai` |
-| **kotlin** | Kotlin development | `kotlin` `gradle` `openjdk21` `android-studio` `android-tools` |
+| **python** | Python development | `python-launcher` `pylint` `jinja2` `python-gitlab` `requests` `pyyaml` `beautifulsoup4` `tabulate` `gitpython` `python-hcl2` `boto3` `atlassian-python-api` `pygithub` |
+| **docker** | Containerization | `docker` `docker-compose` `docker-buildx` `hadolint` `crane` |
+| **web** | Web & static sites | `hugo` `go` `libwebp` `imagemagick` |
+| **devops** | Infrastructure | `opentofu` `kubectl` `talosctl` `k9s` `jq` `kubernetes-helm` `tflint` `terraform-docs` `kube-score` `kubeconform` `helm-docs` `yamllint` `awscli2` `renovate` `updatecli` `glab` `jsonnet` `jsonnet-bundler` `dnsutils` `nmap` |
 | **security** | Security auditing | `osv-scanner` `pip-audit` |
+
+### Common Tools (all environments)
+
+`fish` `wget` `curl` `shellcheck` `unzip` `htop` `btop` `nano` `cacert` `gnupg` `ncdu` `git` `fastfetch` `nodejs` `yq` `bitwarden-cli` `python3` `pip` `uv`
 
 ## 🚀 Usage
 
@@ -78,8 +82,6 @@ alias nix-python='nix develop github:voidtek/nixpkgs#python'
 alias nix-docker='nix develop github:voidtek/nixpkgs#docker'
 alias nix-web='nix develop github:voidtek/nixpkgs#web'
 alias nix-devops='nix develop github:voidtek/nixpkgs#devops'
-alias nix-ai='nix develop github:voidtek/nixpkgs#ai'
-alias nix-kotlin='nix develop github:voidtek/nixpkgs#kotlin'
 alias nix-security='nix develop github:voidtek/nixpkgs#security'
 ```
 
