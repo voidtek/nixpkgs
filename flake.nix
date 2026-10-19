@@ -38,20 +38,12 @@
 
             python = {
               description = "Python development";
+              # Only language tooling here. Project libraries are managed
+              # per-project with `uv` (see commonPackages), not baked into the
+              # dev shell.
               packages = with pkgs; [
                 python-launcher
                 python3Packages.pylint
-                python3Packages.jinja2
-                python3Packages.python-gitlab
-                python3Packages.requests
-                python3Packages.pyyaml
-                python3Packages.beautifulsoup4
-                python3Packages.tabulate
-                python3Packages.gitpython
-                python3Packages.python-hcl2
-                python3Packages.boto3
-                python3Packages.atlassian-python-api
-                python3Packages.pygithub
               ];
             };
 
@@ -66,8 +58,8 @@
               ];
             };
 
-            web = {
-              description = "Web & static sites";
+            hugo = {
+              description = "Hugo & static sites";
               packages = with pkgs; [
                 hugo
                 go
@@ -98,7 +90,6 @@
                 jsonnet
                 jsonnet-bundler
                 dnsutils
-                nmap
               ];
             };
 
@@ -107,6 +98,8 @@
               packages = with pkgs; [
                 osv-scanner
                 pip-audit
+                gitleaks
+                nmap
               ];
             };
           };
@@ -130,7 +123,6 @@
             yq
             bitwarden-cli
             python3
-            python3Packages.pip
             uv
           ];
 
