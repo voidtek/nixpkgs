@@ -12,9 +12,8 @@
       nixpkgs,
       flake-utils,
     }:
-    # Restrict to the systems we actually support (see README). This keeps
-    # `nix flake check --all-systems` green: e.g. current Nixpkgs no longer
-    # supports x86_64-darwin.
+    # Restrict to supported systems: current Nixpkgs no longer supports
+    # x86_64-darwin, which would break `nix flake check --all-systems`.
     flake-utils.lib.eachSystem
       [
         "x86_64-linux"
@@ -26,10 +25,7 @@
           pkgs = nixpkgs.legacyPackages.${system};
           lib = pkgs.lib;
 
-          # ── Profile definitions ────────────────────────────────────────────
-          # Single source of truth: each profile declares a description and the
-          # extra packages it adds on top of the common tools. Dev shells are
-          # generated from this set (see `mkDevShell` below).
+          # Each profile adds packages on top of the common tools.
           profiles = {
             default = {
               description = "Basic dev tools";
@@ -38,9 +34,7 @@
 
             python = {
               description = "Python development";
-              # Only language tooling here. Project libraries are managed
-              # per-project with `uv` (see commonPackages), not baked into the
-              # dev shell.
+              # Language tooling only; project libraries are managed with `uv`.
               packages = with pkgs; [
                 python-launcher
                 python3Packages.pylint
@@ -104,7 +98,7 @@
             };
           };
 
-          # ── Common tools (available in every profile) ──────────────────────
+          # Common tools available in every profile.
           commonPackages = with pkgs; [
             fish
             wget
@@ -126,9 +120,7 @@
             uv
           ];
 
-          # ── Shell hook helpers ──────────────────────────────────────────────
-          # Adds a "[profile]" prefix to the prompt so the active environment is
-          # always visible.
+          # Prefix the prompt with the active profile name.
           promptHook = profileName: ''
             export NIXPKGS_PROFILE="${profileName}"
             case "$TERM" in
@@ -141,8 +133,7 @@
             fi
           '';
 
-          # Drop into Fish automatically, unless already running it. Opt out by
-          # exporting NIXPKGS_NO_FISH=1 before `nix develop`.
+          # Drop into Fish automatically; opt out with NIXPKGS_NO_FISH=1.
           fishLaunch = ''
             if [ -z "''${NIXPKGS_NO_FISH:-}" ] \
               && command -v fish >/dev/null 2>&1 \
@@ -151,7 +142,6 @@
             fi
           '';
 
-          # ── Dev shell builder ───────────────────────────────────────────────
           mkDevShell =
             name: profile:
             pkgs.mkShellNoCC {
@@ -170,14 +160,10 @@
 
           formatter = pkgs.nixfmt;
 
-          # The formatting check only reads a text file, so it is completely
-          # platform-independent. Defining it per-system would force
-          # `nix flake check --all-systems` to *build* the aarch64 variant on
-          # the x86_64 CI runner, which fails with a platform mismatch (there
-          # is no emulation or remote builder). Pin it to x86_64-linux so it is
-          # built exactly once, on the system CI actually runs on.
+          # Pin the formatting check to x86_64-linux: it is platform-independent,
+          # and defining it per-system would make `--all-systems` try to build
+          # the aarch64 variant on the x86_64 CI runner and fail.
           checks = lib.optionalAttrs (system == "x86_64-linux") {
-            # `nix flake check` builds this to ensure flake.nix stays formatted.
             formatting = pkgs.runCommand "check-formatting" { nativeBuildInputs = [ pkgs.nixfmt ]; } ''
               nixfmt --check ${./flake.nix}
               touch $out

@@ -29,8 +29,6 @@ jobs:
         uses: DeterminateSystems/flake-checker-action@main
 
       - name: Run flake checks
-        # Evaluates every dev shell and runs the `checks` outputs
-        # (including the formatting check) across supported systems.
         run: nix flake check --all-systems --print-build-logs
 
   discover:
@@ -47,8 +45,7 @@ jobs:
 
       - name: List dev shells for the current system
         id: list
-        # Build the matrix from the flake itself so CI never drifts from the
-        # profiles defined in flake.nix.
+        # Build the matrix from the flake so CI never drifts from flake.nix.
         run: |
           system="$(nix eval --raw --impure --expr 'builtins.currentSystem')"
           profiles="$(nix eval --json ".#devShells.${system}" \
@@ -60,7 +57,6 @@ jobs:
     needs: discover
     runs-on: ubuntu-latest
     strategy:
-      # Keep building the other profiles even if one fails.
       fail-fast: false
       matrix:
         profile: ${{ fromJSON(needs.discover.outputs.profiles) }}
